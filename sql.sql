@@ -8,17 +8,17 @@ CREATE TABLE movie_users(
 );  
 
 CREATE TABLE reviews(  
-    review_id INT PRIMARY KEY,
+    review_id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     stars INT,
     movie_name VARCHAR(255),
     username VARCHAR(255),
+    review_text TEXT,
     FOREIGN KEY (username) REFERENCES movie_users(username),
     FOREIGN KEY (movie_name) REFERENCES movies(movie_name)
 );
 
 CREATE TABLE genres(  
-    genre_name VARCHAR(255) PRIMARY KEY,
-    genre_id INT   
+    genre_name VARCHAR(255) PRIMARY KEY   
 );
 
 CREATE TABLE movies(  
@@ -29,8 +29,8 @@ CREATE TABLE movies(
 );
 
 CREATE TABLE favorite_movies(  
-    favorite_id INT PRIMARY KEY,
-    username VARCHAR (255),
+    favorite_id SERIAL PRIMARY KEY,
+    username VARCHAR(255),
     movie_name VARCHAR(255),
     FOREIGN KEY (username) REFERENCES movie_users(username),
     FOREIGN KEY (movie_name) REFERENCES movies(movie_name)
